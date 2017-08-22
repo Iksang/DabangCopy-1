@@ -20,7 +20,7 @@ public class RoomListActivity extends BaseActivity {
     private final int REQ_CODE_ROOMFILTER = 1;
 
     private android.widget.ListView roomListView;
-//    필터되서 출력될수 있도록 지원해주는 출력용 리스트
+    //    필터되서 출력될수 있도록 지원해주는 출력용 리스트
     private List<Room> mDisplayRoomArray = new ArrayList<>();
     private RoomListAdapter mAdapter;
     private android.widget.ImageView roomListFilterImg;
@@ -45,7 +45,7 @@ public class RoomListActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, RoomFilterActivity.class);
-                startActivityForResult(intent,REQ_CODE_ROOMFILTER);
+                startActivityForResult(intent, REQ_CODE_ROOMFILTER);
             }
         });
 
@@ -64,26 +64,19 @@ public class RoomListActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQ_CODE_ROOMFILTER){
-            if(resultCode == RESULT_OK){
-                isMonthPay = data.getBooleanExtra("월세선택",true);
-                isChaterPay= data.getBooleanExtra("전세선택",true);
+        if (requestCode == REQ_CODE_ROOMFILTER) {
+            if (resultCode == RESULT_OK) {
+                isMonthPay = data.getBooleanExtra("월세선택", true);
+                isChaterPay = data.getBooleanExtra("전세선택", true);
 
                 mDisplayRoomArray.clear();
 
-                if(isMonthPay){
-                    for(Room rm : GlobalData.allRooms){
-                        if(rm.getRentPay()>0){
-                            mDisplayRoomArray.add(rm);
-                        }
+                for (Room rm : GlobalData.allRooms) {
+                    if (isMonthPay && rm.getRentPay() > 0) {
+                        mDisplayRoomArray.add(rm);
                     }
-                }
-
-                if(isChaterPay){
-                    for(Room rm : GlobalData.allRooms){
-                        if(rm.getRentPay()==0){
-                            mDisplayRoomArray.add(rm);
-                        }
+                    if (isChaterPay && rm.getRentPay() == 0) {
+                        mDisplayRoomArray.add(rm);
                     }
                 }
 
@@ -96,7 +89,7 @@ public class RoomListActivity extends BaseActivity {
     @Override
     public void setValues() {
 
-        mAdapter = new RoomListAdapter(mContext,mDisplayRoomArray);
+        mAdapter = new RoomListAdapter(mContext, mDisplayRoomArray);
         roomListView.setAdapter(mAdapter);
 
     }
