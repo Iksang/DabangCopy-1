@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#000000</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="line_divider">#EFEFEF</color>
+
+    <!--월세를 나타내는 색-->
+    <color name="month_pay_color">#0C58ED</color>
+
+    <!--전세를 나타내는 색-->
+    <color name="not_month_pay_color">#F68D00</color>
+
+</resources>
