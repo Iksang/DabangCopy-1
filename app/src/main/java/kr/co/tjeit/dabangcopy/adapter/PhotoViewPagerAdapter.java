@@ -1,6 +1,7 @@
 package kr.co.tjeit.dabangcopy.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +11,11 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import kr.co.tjeit.dabangcopy.R;
+import kr.co.tjeit.dabangcopy.ViewDetailPhotoActivity;
 
 /**
  * Created by tjoeun on 2017-08-22.
@@ -44,7 +47,7 @@ public class PhotoViewPagerAdapter extends PagerAdapter{
     // ListView 할때 쓰는 Adpater의 getView랑 동일한 역할
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
         View row = inf.inflate(R.layout.photo_item, container, false);
 
         String url = mList.get(position);
@@ -65,6 +68,20 @@ public class PhotoViewPagerAdapter extends PagerAdapter{
         Glide.with(mContext).load(url).into(photoImg);
 
         container.addView(row);
+
+//        뷰를 누르면 다른 화면으로 넘어가도록 이벤트 붙임
+
+        row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ViewDetailPhotoActivity.class);
+                intent.putExtra("사진목록", (ArrayList<String>)mList);
+                intent.putExtra("사진번호", position);
+
+                mContext.startActivity(intent);
+
+            }
+        });
 
 
         return row ;

@@ -18,15 +18,18 @@
             android:value="AIzaSyAPb1GzDorklkd9k-5tXSeytKYY-OCj-GM" />
 
         <activity android:name=".SplashActivity" />
-        <activity android:name=".RoomListActivity">
+        <activity android:name=".RoomListActivity"></activity>
+        <activity android:name=".ViewRoomDetailActivity" />
+        <activity android:name=".RoomFilterActivity" />
+        <activity android:name=".ViewDetailPhotoActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ViewRoomDetailActivity" />
-        <activity android:name=".RoomFilterActivity"></activity>
+        <activity android:name=".SearchActivity"></activity>
     </application>
 
 </manifest>

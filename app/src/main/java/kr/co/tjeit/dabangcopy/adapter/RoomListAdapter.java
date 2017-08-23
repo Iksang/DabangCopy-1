@@ -72,7 +72,7 @@ public class RoomListAdapter extends ArrayAdapter<Room>{
             if(uk>0){
                 payStr = String.format(Locale.KOREA, "%d억%d",uk,thousands);
             }
-            else if(uk==0){
+            else if(thousands==0){
                 payStr = String.format(Locale.KOREA, "%d억",uk);
             }
             else {

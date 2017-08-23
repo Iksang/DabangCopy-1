@@ -26,6 +26,11 @@ public class RoomListActivity extends BaseActivity {
     private android.widget.ImageView roomListFilterImg;
     private boolean isMonthPay = true;
     private boolean isChaterPay = true;
+    private boolean isOneRoom = true;
+    private boolean isTwoRoom = true;
+    private boolean isThreeRoom = true;
+    private int depositSelectedMin = 0;
+    private int depositSelectedMax = 500000000;
 
 
     @Override
@@ -68,22 +73,62 @@ public class RoomListActivity extends BaseActivity {
             if (resultCode == RESULT_OK) {
                 isMonthPay = data.getBooleanExtra("월세선택", true);
                 isChaterPay = data.getBooleanExtra("전세선택", true);
+                isOneRoom = data.getBooleanExtra("원룸선택", true);
+                isTwoRoom = data.getBooleanExtra("투룸선택", true);
+                isThreeRoom= data.getBooleanExtra("쓰리룸선택", true);
+                depositSelectedMin = data.getIntExtra("보증금최소금액", 0);;
+                depositSelectedMax = data.getIntExtra("보증금최대금액", 500000000);;
 
-                mDisplayRoomArray.clear();
+                filterRoomList();
 
-                for (Room rm : GlobalData.allRooms) {
-                    if (isMonthPay && rm.getRentPay() > 0) {
-                        mDisplayRoomArray.add(rm);
-                    }
-                    if (isChaterPay && rm.getRentPay() == 0) {
-                        mDisplayRoomArray.add(rm);
-                    }
-                }
-
-                mAdapter.notifyDataSetChanged();
 
             }
         }
+    }
+
+    private void filterRoomList() {
+
+        mDisplayRoomArray.clear();
+
+        boolean isPaymentOK = false;
+        boolean isRoomCountOK = false;
+        boolean isDepositOk = false;
+
+
+        for (Room rm : GlobalData.allRooms) {
+            if (isMonthPay && rm.getRentPay() > 0) {
+                isPaymentOK = true;
+            }
+            if (isChaterPay && rm.getRentPay() == 0) {
+                isPaymentOK = true;
+            }
+
+            if(isOneRoom && rm.getRoomCount() == 1){
+                isRoomCountOK = true;
+            }
+            if(isTwoRoom && rm.getRoomCount() == 2){
+                isRoomCountOK = true;
+            }
+            if(isThreeRoom && rm.getRoomCount() == 3){
+                isRoomCountOK = true;
+            }
+
+            if(depositSelectedMin <= rm.getDeposit() &&  rm.getDeposit() >= depositSelectedMax){
+                isDepositOk = true;
+            }
+
+            if(isPaymentOK&&isRoomCountOK&&isDepositOk){
+                mDisplayRoomArray.add(rm);
+
+            }
+            isPaymentOK = false;
+            isRoomCountOK = false;
+            isDepositOk = false;
+        }
+
+        mAdapter.notifyDataSetChanged();
+
+
     }
 
     @Override

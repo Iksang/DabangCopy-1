@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="kr.co.tjeit.dabangcopy.RoomFilterActivity">
 
@@ -26,10 +26,15 @@
 
 
     </FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="계약 방식 선택"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
         <ToggleButton
             android:id="@+id/selectMonthPayBtn"
@@ -47,10 +52,76 @@
             android:textOn="전세 선택"
             android:textOff="전세 안봄"
             android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="보증금 선택"/>
+        <TextView
+            android:id="@+id/depositRange"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 ~ 5억"/>
+    </LinearLayout>
+
+    <io.apptik.widget.MultiSlider
+        android:id="@+id/depositSlider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:thumbNumber="2"
+        app:drawThumbsApart="true"
+
+        />
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="방 종류 선택"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ToggleButton
+            android:id="@+id/selectOneRoomBtn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:textOn="원룸 O"
+            android:textOff="원룸 X"/>
+
+        <ToggleButton
+            android:id="@+id/selectTwoRoomBtn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:checked="true"
+            android:layout_height="wrap_content"
+            android:textOn="투룸 O"
+            android:textOff="투룸 X"/>
+
+        <ToggleButton
+            android:id="@+id/selectThreeRoomBtn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:checked="true"
+            android:layout_height="wrap_content"
+            android:textOn="쓰리룸 O"
+            android:textOff="쓰리룸 X"/>
 
     </LinearLayout>
+
+
 
 
 
