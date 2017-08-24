@@ -22,6 +22,7 @@ public class Room implements Serializable{
     // => 위도와 경도는 지도에서 방의 위치를 찍는데 활용할 변수들.
     // 지도 라이브러리 끼워넣기를 해보게 된다.
     private String description; // 상세 설명
+    private String address; // 주소
 
 
 //    관계
@@ -29,14 +30,22 @@ public class Room implements Serializable{
     private Realtor manager; // 이 방을 관리하고 있는 공인중개사
     private List<User> likeUser; // 이방을 찜한 사람의 목록
 
+//    가까운 지하철역 목록
+    private  List<Subway> nearStations = new ArrayList<>();
+
+    //    가까운 대학교 목록
+    private  List<University> nearUniversities = new ArrayList<>();
+
 
 //    사진 주소 목록
     private List<String> photoURLs = new ArrayList<>();
 
+
     public Room() {
     }
 
-    public Room(int roomId, int deposit, int rentPay, int roomCount, double roomsize, int stairCount, int managePay, double latitude, double longitude, String description, Realtor manager) {
+
+    public Room(int roomId, int deposit, int rentPay, int roomCount, double roomsize, int stairCount, int managePay, double latitude, double longitude, String description, String address, Realtor manager) {
         this.roomId = roomId;
         this.deposit = deposit;
         this.rentPay = rentPay;
@@ -47,6 +56,7 @@ public class Room implements Serializable{
         this.latitude = latitude;
         this.longitude = longitude;
         this.description = description;
+        this.address = address;
         this.manager = manager;
     }
 
@@ -152,5 +162,29 @@ public class Room implements Serializable{
 
     public void setPhotoURLs(List<String> photoURLs) {
         this.photoURLs = photoURLs;
+    }
+
+    public List<Subway> getNearStations() {
+        return nearStations;
+    }
+
+    public void setNearStations(List<Subway> nearStations) {
+        this.nearStations = nearStations;
+    }
+
+    public List<University> getNearUniversities() {
+        return nearUniversities;
+    }
+
+    public void setNearUniversities(List<University> nearUniversities) {
+        this.nearUniversities = nearUniversities;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

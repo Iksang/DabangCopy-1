@@ -12,6 +12,8 @@ import java.util.List;
 
 import kr.co.tjeit.dabangcopy.adapter.RoomListAdapter;
 import kr.co.tjeit.dabangcopy.data.Room;
+import kr.co.tjeit.dabangcopy.data.Subway;
+import kr.co.tjeit.dabangcopy.data.University;
 import kr.co.tjeit.dabangcopy.util.GlobalData;
 
 public class RoomListActivity extends BaseActivity {
@@ -33,15 +35,22 @@ public class RoomListActivity extends BaseActivity {
     private int depositSelectedMax = 500000000;
 
 
+    private Subway mSubway = null;
+
+    private University mUniversity = null;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_list);
-        GlobalData.initGlobalData();
         mDisplayRoomArray.addAll(GlobalData.allRooms);
+        mSubway =(Subway)getIntent().getSerializableExtra("인근지하철역");
+        mUniversity = (University)getIntent().getSerializableExtra("인근대학교");
         bindViews();
         setupEvents();
         setValues();
+        filterRoomList();
     }
 
     @Override
@@ -93,6 +102,8 @@ public class RoomListActivity extends BaseActivity {
         boolean isPaymentOK = false;
         boolean isRoomCountOK = false;
         boolean isDepositOk = false;
+        boolean isNearSubway = false;
+        boolean isNearUniversity = false;
 
 
         for (Room rm : GlobalData.allRooms) {
@@ -113,31 +124,73 @@ public class RoomListActivity extends BaseActivity {
                 isRoomCountOK = true;
             }
 
-            if(depositSelectedMin <= rm.getDeposit() &&  rm.getDeposit() >= depositSelectedMax){
+            if(depositSelectedMin <= rm.getDeposit() &&  rm.getDeposit() <= depositSelectedMax){
                 isDepositOk = true;
             }
 
-            if(isPaymentOK&&isRoomCountOK&&isDepositOk){
+
+
+            if(mSubway != null){
+                if(rm.getNearStations().contains(mSubway)){
+                    isNearSubway = true;
+                }
+            }
+            else{
+                isNearSubway = true;
+            }
+
+
+
+
+            if(mUniversity != null){
+                if(rm.getNearUniversities().contains(mUniversity)){
+                    isNearUniversity = true;
+                }
+            }
+            else {
+                isNearUniversity=true;
+            }
+
+
+            if(isPaymentOK&&isRoomCountOK&&isDepositOk&&isNearSubway&&isNearUniversity){
                 mDisplayRoomArray.add(rm);
 
             }
             isPaymentOK = false;
             isRoomCountOK = false;
             isDepositOk = false;
+            isNearSubway = false;
+            isNearUniversity = false;
         }
 
         mAdapter.notifyDataSetChanged();
 
 
     }
+    private void filterSubwayRoom() {
+
+        mDisplayRoomArray.clear();
+
+
+        for(Room rm : GlobalData.allRooms){
+            if(rm.getNearStations().contains(mSubway)){
+                mDisplayRoomArray.add(rm);
+            }
+        }
+    }
+
 
     @Override
     public void setValues() {
 
+
         mAdapter = new RoomListAdapter(mContext, mDisplayRoomArray);
+
         roomListView.setAdapter(mAdapter);
 
     }
+
+
 
     @Override
     public void bindViews() {
