@@ -12,25 +12,168 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <fragment
+        <LinearLayout
             android:id="@+id/homeFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            class="kr.co.tjeit.dabangcopy.Fragment.HomeFragment"/>
+            android:layout_height="match_parent">
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                class="kr.co.tjeit.dabangcopy.Fragment.HomeFragment"
+                tools:layout="@layout/frag_home" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/favoriteListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                class="kr.co.tjeit.dabangcopy.Fragment.FavoriteListFragment"
+                tools:layout="@layout/flag_favorite_list" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/myProfileFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                class="kr.co.tjeit.dabangcopy.Fragment.MyProfileFragment"
+                tools:layout="@layout/frag_my_profile" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/mapListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                class="kr.co.tjeit.dabangcopy.Fragment.MapListFragment"
+                tools:layout="@layout/flag_map_list" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/seeMoreFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                class="kr.co.tjeit.dabangcopy.Fragment.SeeMoreFragment"
+                tools:layout="@layout/flag_see_more" />
+        </LinearLayout>
 
     </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:background="@color/white"
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/line_divider"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:id="@+id/homeBtn"
+                android:tag="0"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/ic_launcher"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="홈"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/favoriteBtn"
+                android:tag="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/ic_launcher"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="관심목록"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/mapListBtn"
+                android:tag="2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/ic_launcher"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="지도"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/myPofileBtn"
+                android:tag="3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/ic_launcher"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="My"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/seeMoreBtn"
+                android:tag="4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/ic_launcher"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="더보기"/>
+            </LinearLayout>
 
+
+        </LinearLayout>
     </LinearLayout>
 
 
