@@ -39,6 +39,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:orientation="vertical">
@@ -52,10 +53,18 @@
                             app:civ_border_width="2dp" />
 
                         <TextView
+                            android:id="@+id/myNameTxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:text="손익상"
+                            android:textColor="@color/black" />
+                        <TextView
+                            android:id="@+id/userPhoneTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="010-1324-8731"
                             android:textColor="@color/black" />
                     </LinearLayout>
                 </FrameLayout>

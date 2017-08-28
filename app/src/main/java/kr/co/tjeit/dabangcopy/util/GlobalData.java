@@ -15,6 +15,8 @@ import kr.co.tjeit.dabangcopy.data.User;
 
 public class GlobalData {
 
+    public static User loginUser = null;
+
     public static List<User> users = new ArrayList<>();
     public static List<Realtor> relators = new ArrayList<>();
     public static List<Room> allRooms = new ArrayList<>();

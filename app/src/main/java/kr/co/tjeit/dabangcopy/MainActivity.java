@@ -16,6 +16,11 @@ import kr.co.tjeit.dabangcopy.util.GlobalData;
 
 public class MainActivity extends BaseActivity {
 
+
+//    화면에 나타나있는 메인액티비티를 저장하는 변수.
+    public static MainActivity myActivity;
+
+
     private android.widget.LinearLayout homeFragment;
     private android.widget.LinearLayout myProfileFragment;
     private LinearLayout homeBtn;
@@ -28,10 +33,15 @@ public class MainActivity extends BaseActivity {
     private LinearLayout seeMoreFragment;
     private LinearLayout myPofileBtn;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        MainActivity에게 접근할수 있는 변수를 초기화
+        myActivity = this;
 
 
 

@@ -2,15 +2,15 @@ package kr.co.tjeit.dabangcopy;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Camera;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import kr.co.tjeit.dabangcopy.util.ContextUtil;
 
 public class MyProfileSettingActivity extends BaseActivity {
 
@@ -28,11 +29,17 @@ public class MyProfileSettingActivity extends BaseActivity {
     private de.hdodenhof.circleimageview.CircleImageView profileimage;
     private android.widget.Button logOutBtn;
     private Button changePictureBtn;
+    private android.widget.TextView userIdTxt;
+    private TextView changeNameBtn;
+    private android.widget.EditText userNameEdt;
+    private EditText phoneNumEdt;
+    private TextView phoneNumChangeBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile_setting);
+
 
 
         bindViews();
@@ -50,6 +57,22 @@ public class MyProfileSettingActivity extends BaseActivity {
                 myBuilder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
+//                        로그아웃? => 로그인한 사용자 정보를 파기;
+                        ContextUtil.logoutProcess();
+
+//                        ※ 프로필 세팅화면이 종료되고, 메인액티비티로 돌아가게됨.
+
+//                        실제로 원하는건, 메인액티비티도 같이 종료되고
+//                        finish의 의미? => ~~Activity를 종료해라. 자기자신을 종료해라.
+//                        MainActivity를 종료하려면, MainActivity의 finish를 호출.
+                        MainActivity.myActivity.finish();
+
+//                        로그인 액티비티가 실행되도록
+                        finish();
+                        Intent intent = new Intent(mContext, LoginActivity.class);
+                        startActivity(intent);
+
 
                     }
                 });
@@ -79,6 +102,22 @@ public class MyProfileSettingActivity extends BaseActivity {
                     }
                 });
                 myBuilder.show();
+            }
+        });
+
+        changeNameBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ContextUtil.setUserName(mContext, userNameEdt.getText().toString());
+                finish();
+
+            }
+        });
+        phoneNumChangeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ContextUtil.setUserPhoneNumber(mContext, phoneNumEdt.getText().toString());
+                finish();
             }
         });
 
@@ -139,13 +178,22 @@ public class MyProfileSettingActivity extends BaseActivity {
 
     @Override
     public void setValues() {
+        userIdTxt.setText(ContextUtil.getUserId(mContext));
+        userNameEdt.setText(ContextUtil.getLoginUser(mContext).getName());
+        phoneNumEdt.setText(ContextUtil.getLoginUser(mContext).getPhoneNum());
+        Glide.with(mContext).load(ContextUtil.getLoginUser(mContext).getProfileImageURL()).into(profileimage);
 
     }
 
     @Override
     public void bindViews() {
         this.logOutBtn = (Button) findViewById(R.id.logOutBtn);
+        this.phoneNumChangeBtn = (TextView) findViewById(R.id.phoneNumChangeBtn);
+        this.phoneNumEdt = (EditText) findViewById(R.id.phoneNumEdt);
+        this.changeNameBtn = (TextView) findViewById(R.id.changeNameBtn);
+        this.userNameEdt = (EditText) findViewById(R.id.userNameEdt);
         this.changePictureBtn = (Button) findViewById(R.id.changePictureBtn);
+        this.userIdTxt = (TextView) findViewById(R.id.userIdTxt);
         this.profileimage = (CircleImageView) findViewById(R.id.profile_image);
 
     }

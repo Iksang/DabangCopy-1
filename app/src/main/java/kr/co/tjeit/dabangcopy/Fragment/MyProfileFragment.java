@@ -9,10 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import kr.co.tjeit.dabangcopy.MyProfileSettingActivity;
 import kr.co.tjeit.dabangcopy.R;
+import kr.co.tjeit.dabangcopy.util.ContextUtil;
 
 /**
  * Created by tjoeun on 2017-08-25.
@@ -23,11 +27,15 @@ public class MyProfileFragment extends Fragment {
     private de.hdodenhof.circleimageview.CircleImageView profileimage;
     private android.widget.LinearLayout callServicecenterBtn;
     private LinearLayout myProfileBtn;
+    private android.widget.TextView myNameTxt;
+    private TextView userPhoneTxt;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.frag_my_profile, container, false);
+        this.userPhoneTxt = (TextView) v.findViewById(R.id.userPhoneTxt);
+        this.myNameTxt = (TextView) v.findViewById(R.id.myNameTxt);
         this.myProfileBtn = (LinearLayout) v.findViewById(R.id.myProfileBtn);
         this.callServicecenterBtn = (LinearLayout) v.findViewById(R.id.callServicecenterBtn);
         this.profileimage = (CircleImageView) v.findViewById(R.id.profile_image);
@@ -63,7 +71,18 @@ public class MyProfileFragment extends Fragment {
         });
     }
 
-    private void setValues() {
+    @Override
+    public void onResume() {
+        super.onResume();
+        myNameTxt.setText(ContextUtil.getLoginUser(getActivity()).getName());
+        userPhoneTxt.setText(ContextUtil.getLoginUser(getActivity()).getPhoneNum());
     }
+
+    private void setValues() {
+        Glide.with(getActivity()).load(ContextUtil.getLoginUser(getActivity()).getProfileImageURL()).into(profileimage);
+        myNameTxt.setText(ContextUtil.getLoginUser(getActivity()).getName());
+        userPhoneTxt.setText(ContextUtil.getLoginUser(getActivity()).getPhoneNum());
+    }
+
 
 }

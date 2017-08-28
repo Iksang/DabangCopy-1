@@ -13,6 +13,7 @@ public class User implements Serializable{
 //    자체 고유 속성들.
     private int userId; // DB에서 몇번째 사용자인지
     private String name; //사용자의 이름
+    private String loginId; // 로그인할때 입력하는 아이디
     private String provider; // 자체 회원가입, 페이스북으로 로그인, 카카오톡으로 로그인
     private String profileImageURL; // 프사가 있는 URL 경로
     private String phoneNum; // 방으 ㄹ보고싶다고 하면 연락받을 수 있는 폰번.
@@ -27,10 +28,19 @@ public class User implements Serializable{
 
     public User(int userId, String name, String provider, String profileImageURL, String phoneNum) {
         this.userId = userId;
+
         this.name = name;
         this.provider = provider;
         this.profileImageURL = profileImageURL;
         this.phoneNum = phoneNum;
+    }
+
+    public String getLoginId() {
+        return loginId;
+    }
+
+    public void setLoginId(String loginId) {
+        this.loginId = loginId;
     }
 
     public int getUserId() {
